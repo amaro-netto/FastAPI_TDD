@@ -1,0 +1,28 @@
+# Ignora arquivos de cache
+__pycache__/
+*.pyc
+
+# Ignora pastas de ambiente virtual
+.venv/
+venv/
+env/
+
+# Ignora arquivos de banco de dados
+*.sqlite3
+*.db
+
+# Ignora arquivos de configuração de ambiente
+.env
+
+# Ignora cache do Pytest
+.pytest_cache/
+
+# Ignora arquivos de build e distribuição
+dist/
+build/
+
+# Ignora arquivos gerados pelo Poetry
+poetry.lock
+
+# Ignora arquivos gerados pelo PyCharm (se usar)
+.idea/
