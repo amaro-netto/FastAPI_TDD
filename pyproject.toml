@@ -1,28 +1,35 @@
-[project]
+[tool.poetry]
 name = "tdd-project"
 version = "0.0.1"
-description = "Neste projeto você aprenderá na prática como implementar o TDD em uma aplicação utilizando FastAPI juntamente com Pytest."
-authors = [
-    {name = "amaro-netto",email = "amarosilva002@gmail.com"}
-]
+description = "Neste projeto você aprenderá na prática como implementar o TDD em uma aplicação utilizando FastAPI juntamente com Pytest. Criaremos juntos uma API utilizando o banco de dados MongoDB e realizando testes unitários e de integração. Além disso, você pode conhecer boas práticas de como documentar um projeto."
+authors = ["Nayanna Nara <nayanna501@gmail.com>"]
 readme = "README.md"
-requires-python = "^3.12"
-dependencies = [
-    "fastapi (>=0.104.1,<0.105.0)",
-    "uvicorn (>=0.24.0.post1,<0.25.0)",
-    "pydantic (>=2.5.1,<3.0.0)",
-    "pydantic-settings (>=2.1.0,<3.0.0)",
-    "motor (>=3.3.1,<4.0.0)"
-]
 
-[tool.poetry]
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.104.1"
+uvicorn = "^0.24.0.post1"
+pydantic = "^2.5.1"
+pydantic-settings = "^2.1.0"
+motor = "^3.3.1"
 
+# Dependências de desenvolvimento movidas para o grupo 'dev'
 [tool.poetry.group.dev.dependencies]
-pytest = " ^7.4.3"
-pytest-asyncio = " ^0.21.1"
-pre-commit = " ^3.5.0"
-httpx = " ^0.25.1"
+pytest = "^7.4.3"
+pytest-asyncio = "^0.21.1"
+pre-commit = "^3.5.0"
+httpx = "^0.25.1"
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = [
+    "--strict-config",
+    "--strict-markers",
+    "--ignore=docs_src",
+]
+xfail_strict = true
+junit_family = "xunit2"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
