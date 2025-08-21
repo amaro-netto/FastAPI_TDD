@@ -58,6 +58,51 @@ A arquitetura do projeto é organizada de forma modular, com separação clara d
 ├── schemas/
 └── usecases/
 ```
+#### Diagramas de Sequência
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Client
+    participant Router
+    participant Controller
+    participant Usecase
+    participant Database
+
+    Client->>+Router: POST /products (body: ProductIn)
+    Note right of Client: O cliente envia uma requisição para criar um produto.
+
+    Router->>+Controller: Chama a função 'post' do controlador
+    Note right of Router: O roteador direciona a requisição para o controlador correto.
+
+    Controller->>+Usecase: Chama o método 'create' do usecase
+    Note right of Controller: O controlador passa os dados para a camada de lógica de negócio.
+
+    Usecase->>Usecase: Valida os dados (Pydantic)
+    Note left of Usecase: O usecase garante que os dados estão corretos.
+
+    Usecase->>+Database: Insere o novo produto
+    Note right of Usecase: O usecase se conecta ao banco de dados e insere o produto.
+
+    Database-->>-Usecase: Confirma a inserção
+    Usecase-->>-Controller: Retorna o objeto 'ProductOut' criado
+    Controller-->>-Router: Retorna a resposta HTTP (201 Created)
+
+    Router-->>-Client: Envia a resposta HTTP (JSON)
+    Note left of Router: A API retorna uma resposta de sucesso ao cliente.
+```
+#### Análise do Diagrama
+Este diagrama detalha o fluxo completo da requisição:
+
+* Cliente envia uma requisição POST para o endpoint /products com o corpo da requisição (ProductIn).
+* Router (roteador do FastAPI) intercepta a requisição e a direciona para o Controller (o nosso product.py).
+* Controller chama o método create da camada de lógica de negócio (Usecase).
+* Usecase (nosso product_usecase) realiza a validação dos dados com o Pydantic antes de prosseguir.
+* Usecase se conecta ao Database e executa a operação de inserção.
+* Database responde, confirmando a inserção.
+* A resposta retorna para o Usecase, que então retorna o objeto criado de volta para o Controller.
+* Controller formata a resposta e a envia de volta para o Router.
+* Router a envia para o Cliente com o código de status 201 Created e o objeto JSON do produto recém-criado.
 
 #### 🚦 **Status do Projeto**
 
@@ -128,4 +173,5 @@ Este projeto é uma jornada de aprendizado sobre TDD, demonstrando como essa met
 ---
 
 ### 📸 **Prévia do Projeto**
-*Adicione aqui imagens ou GIFs do projeto em funcionamento, como a documentação Swagger da API.*
+
+<img width="1615" height="623" alt="Captura de tela 2025-08-20 230752" src="https://github.com/user-attachments/assets/0505afd8-ad1d-43d1-9077-a23726867943" />
