@@ -58,7 +58,7 @@ A arquitetura do projeto é organizada de forma modular, com separação clara d
 ├── schemas/
 └── usecases/
 ```
-#### Diagramas de Sequência
+Diagramas de Sequência
 
 ```mermaid
 sequenceDiagram
@@ -91,7 +91,7 @@ sequenceDiagram
     Router-->>-Client: Envia a resposta HTTP (JSON)
     Note left of Router: A API retorna uma resposta de sucesso ao cliente.
 ```
-#### Análise do Diagrama
+Análise do Diagrama
 Este diagrama detalha o fluxo completo da requisição:
 
 * Cliente envia uma requisição POST para o endpoint /products com o corpo da requisição (ProductIn).
